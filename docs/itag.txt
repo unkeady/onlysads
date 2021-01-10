@@ -1,0 +1,74 @@
+5-2-audio&video flv 240p
+6-2-audio&video flv 270p
+17-2-audio&video 3gp 144p
+18-2-audio&video mp4 360p
+22-2-audio&video mp4 720p
+34-2-audio&video flv 360p
+35-2-audio&video flv 480p
+36-2-audio&video 3gp 180p
+37-2-audio&video mp4 1080p
+38-2-audio&video mp4 3072p
+43-2-audio&video webm 360p
+44-2-audio&video webm 480p
+45-2-audio&video webm 720p
+46-2-audio&video webm 1080p
+82-2-audio&video mp4 360p 3D
+83-2-audio&video mp4 480p 3D
+84-2-audio&video mp4 720p 3D
+85-2-audio&video mp4 1080p 3D
+92-2-audio&video hls 240p 3D
+93-2-audio&video hls 360p 3D
+94-2-audio&video hls 480p 3D
+95-2-audio&video hls 720p 3D
+96-2-audio&video hls 1080p
+100-2-audio&video webm 360p 3D
+101-2-audio&video webm 480p 3D
+102-2-audio&video webm 720p 3D
+132-2-audio&video hls 240p
+133-3-video mp4 240p
+134-3-video mp4 360p
+135-3-video mp4 480p
+136-3-video mp4 720p
+137-3-video mp4 1080p
+138-3-video mp4 2160p60
+139-4-audio m4a 48k
+140-4-audio m4a 128k
+141-4-audio m4a 256k
+151-2-audio/video hls 72p
+160-3-video mp4 video 144p
+167-3-video webm 360p
+168-3-video webm 480p
+169-3-video webm 1080p
+171-4-audio webm 128k
+218-3-video webm 480p
+219-3-video webm 144p
+242-3-video webm 240p
+243-3-video webm 360p
+244-3-video webm 480p
+245-3-video webm 480p
+246-3-video webm 480p
+247-3-video webm 720p
+248-3-video webm 1080p
+249-4-audio webm 50k
+250-4=audio webm 70k
+251-4=audio webm 160k
+264-3-video mp4 1440p
+266-3-video mp4 2160p60
+271-3-video webm 1440p
+272-3-video webm 4320p
+278-3-video webm 144p
+298-3-video mp4 720p 60fps
+299-3-video mp4 1080p 60fps
+302-3-video webm 720p 60fps
+303-3-video webm 1080p 60fps
+308-3-video webm 1440p 60fps
+313-3-video webm 2160p
+315-3-video webm 2160p 60fps
+330-3-video webm 144p 60fps hdr	
+331-3-video webm 240p 60fps hdr	
+332-3-video webm 360p 60fps hdr	
+333-3-video webm 480p 60fps hdr	
+334-3-video webm 720p 60fps hdr	
+335-3-video webm 1080p 60fps hdr	
+336-3-video webm 1440p 60fps hdr	
+337-3-video webm 2160p 60fps hdr	
