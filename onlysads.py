@@ -1,38 +1,28 @@
-from colorama import Fore as f, Back as b, Style as s
+from colorama import Fore as f, Back as b, Style as s, init
 from os import system, name
 from pytube import YouTube
-from colorama import init
 from sys import platform
 from time import sleep
 import urllib.request
 import argparse
 import re
-import os
-
-init(autoreset=True)
-
-des = "YIRMAA GİDİYOM AAA KİKİK İK İK İK İKAAAAAAA"
 
 
+des = "onlysads"
 
-filepath = 'C:/Users/unkeady/Documents/GitHub/onlysads/docs/itag.txt'
+searchtimes = 10
+filepath = 'docs/itag.txt'
 
-windowsdesktop = "C:/Users/unkeady/Desktop"
-windowsdocuments = "C:/Users/unkeady/Documents"
-windowsdownloads = "C:/Users/unkeady/Downloads"
+init(autoreset=True)  # colorama
 
-linuxdesktop = "/mnt/c/Users/unkeady/Desktop"
-linuxdocuments = "/mnt/c/Users/unkeady/Documents"
-linuxdownloads = "/mnt/c/Users/unkeady/Downloads"
-
-searchtimes = 1
-
-"""
-Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
-Back: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
-Style: DIM, NORMAL, BRIGHT, RESET_ALL
-"""
-
+if platform == "linux" or platform == "linux2":
+    desktop = "/mnt/c/Users/unkeady/Desktop"
+    documents = "/mnt/c/Users/unkeady/Documents"
+    downloads = "/mnt/c/Users/unkeady/Downloads"
+if platform == "win32":
+    desktop = "C:/Users/unkeady/Desktop"
+    documents = "C:/Users/unkeady/Documents"
+    downloads = "C:/Users/unkeady/Downloads"
 
 
 def banner():
@@ -45,53 +35,67 @@ def banner():
                    /____/                               
                                                         ''')
 
-
-
-
-
-
-    #sleep(2)
+    sleep(1)
     clear()
 
 
+def running():
 
-def clear():
-    if name == 'nt':
-        _ = system('cls')
-    else:
-        _ = system('clear')
-
-
-
-def bye():
     clear()
-    print("I don't like goodbyes if you're leaving then get the fuck.")
-    exit()
+    banner()
+    while True:
+
+        print(f.MAGENTA + '1 ~ Search')
+        print(f.GREEN + '2 ~ Link')
+        print(f.CYAN + '3 ~ Color test')
+        print(f.RED + '0 ~ Exit')
+
+        ready = input(f.MAGENTA + '> ' + s.RESET_ALL)
+
+        if (ready.lower() == "1"):
+            clear()
+            search()
+        elif (ready.lower() == "2"):
+            clear()
+            urlgo = input("url > ")
+            clear()
+            description(urlgo)
+        elif (ready.lower() == "3"):
+            clear()
+            print(f.BLACK + "BLACK")
+            print(f.RED + "RED")
+            print(f.GREEN + "GREEN")
+            print(f.YELLOW + "YELLOW")
+            print(f.BLUE + "BLUE")
+            print(f.MAGENTA + "MAGENTA")
+            print(f.CYAN + "CYAN")
+            print(f.WHITE + "WHITE")
+            print(f.RESET + "RESET\n")
+        elif (ready.lower() == "0"):
+            clear()
+            bye()
+        else:
+            clear()
+            print("running error")
 
 
+def search():
+    word = input(f.MAGENTA + '> ' + s.RESET_ALL)
+    url = urllib.request.urlopen(
+        "https://www.youtube.com/results?search_query=" + word)
+    shorturl = re.findall(r"watch\?v=(\S{11})", url.read().decode())
 
-def gitgud():
-    print(f.YELLOW + '''
-       |^^^|
-        }_{
-        }_{
-    /|_/---\_|\ 
-    I _|\_/|_ I
-    \| |   | |/
-       | G |
-       | I |
-       | T |
-       |   |
-       | G |
-       | U |
-       | D |
-       |   |
-       \   /
-        \ /
-         Y
-    ''')
-    sleep(2)
+    i = 0
+    while (i < searchtimes):
+        yt = YouTube(str("https://www.youtube.com/watch?v=" + shorturl[i]))
+        print(f.BLUE + '[', f.BLUE + str(i), f.BLUE + '] ',
+              f.GREEN + f'{yt.title} - {yt.author}', sep='')
+        i = i + 1
+
+    take = int(input(f.MAGENTA + '\n> ' + s.RESET_ALL))
+    finalurl = ("https://www.youtube.com/watch?v=" + shorturl[take])
     clear()
+    description(finalurl)
 
 
 def description(finalurl):
@@ -110,9 +114,9 @@ def description(finalurl):
         print(f.GREEN + '2 ~ Show description')
         print(f.CYAN + '3 ~ Thumbnail url')
         print(f.YELLOW + '4 ~ Download thumbnail')
-        print(f.RED + '0 ~ exit')
+        print(f.RED + '0 ~ Exit')
 
-        cat = input(f.MAGENTA + '> '+ s.RESET_ALL)
+        cat = input(f.MAGENTA + '> ' + s.RESET_ALL)
 
         if (cat.lower() == "1"):
             clear()
@@ -127,87 +131,69 @@ def description(finalurl):
         elif (cat.lower() == "3"):
             clear()
             print(f.BLUE + f'Thumbnail > {yt.thumbnail_url}\n')
-        
+
         elif (cat.lower() == "4"):
             clear()
             thumbnaildown(yt.thumbnail_url)
-        
+
         elif (cat.lower() == "0"):
             bye()
-        
+
         else:
             clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
-
-
-def search():
-    word = input(f.MAGENTA + '> '+ s.RESET_ALL)
-    url = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + word)
-    shorturl = re.findall(r"watch\?v=(\S{11})", url.read().decode())
-
-    i = 0
-    while (i < searchtimes):
-        yt = YouTube(str("https://www.youtube.com/watch?v=" + shorturl[i]))
-        print(f.BLUE + '[',f.BLUE +  str(i),f.BLUE +  '] ',f.GREEN +  f'{yt.title} - {yt.author}', sep='')
-        i = i + 1
-
-    take = int(input(f.MAGENTA + '\n> '+ s.RESET_ALL))
-    finalurl = ("https://www.youtube.com/watch?v=" + shorturl[take])
-    clear()
-    description(finalurl)
-
-
+            print("description error")
 
 
 def thumbnaildown(theurl):
     while True:
-        print('  ~ Location ~ \n')
+        print(f.RED + '  ~ Location ~ \n')
         print(f.MAGENTA + '1 ~ Desktop')
         print(f.GREEN + '2 ~ Downloads')
         print(f.CYAN + '3 ~ Documents')
         print(f.YELLOW + '4 ~ Enter location')
-        print(f.RED + '0 ~ exit')
+        print(f.RED + '0 ~ Exit')
 
-        cat = input(f.MAGENTA + '> '+ s.RESET_ALL)
+        cat = input(f.MAGENTA + '> ' + s.RESET_ALL)
 
         if (cat.lower() == "1"):
             clear()
-            print("  ~ downloading ~  ")
+            print(f.GREEN + "  ~ downloading ~  ")
             urllib.request.urlretrieve(theurl, desktop + "/thumbnail.jpg")
             clear()
-            print("   ~ finished ~  ")
+            print(f.GREEN + "   ~ finished ~  ")
             break
 
         elif (cat.lower() == "2"):
             clear()
-            print("  ~ downloading ~  ")
+            print(f.GREEN + "  ~ downloading ~  ")
             urllib.request.urlretrieve(theurl, downloads + "/thumbnail.jpg")
             clear()
-            print("   ~ finished ~  ")
+            print(f.GREEN + "   ~ finished ~  ")
             break
 
         elif (cat.lower() == "3"):
             clear()
-            print("  ~ downloading ~  ")
+            print(f.GREEN + "  ~ downloading ~  ")
             urllib.request.urlretrieve(theurl, documents + "/thumbnail.jpg")
             clear()
-            print("   ~ finished ~  ")
+            print(f.GREEN + "   ~ finished ~  ")
             break
 
         elif (cat.lower() == "4"):
             clear()
-            dest = input("Enter a destination like > C:/Users/unkeady/Desktop/thumbnail.jpg\n> ")
-            print("  ~ downloading ~  ")
+            dest = input(
+                "Enter a destination like > C:/Users/unkeady/Desktop/thumbnail.jpg\n> ")
+            print(f.GREEN + "  ~ downloading ~  ")
             urllib.request.urlretrieve(theurl, str(dest))
             clear()
-            print("   ~ finished ~  ")
+            print(f.GREEN + "   ~ finished ~  ")
             break
 
         elif (cat.lower() == "0"):
             bye()
         else:
             clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
+            print("thumbnaildown error")
 
 
 def download(yt):
@@ -217,10 +203,10 @@ def download(yt):
         print(f.GREEN + '2 ~ Video + Audio')
         print(f.CYAN + '3 ~ Video')
         print(f.YELLOW + '4 ~ Audio')
-        print('5 ~ Show all options')
-        print(f.RED + '0 ~ exit')
+        print(f.MAGENTA + '5 ~ Show all options')
+        print(f.RED + '0 ~ Exit')
 
-        cat = input(f.MAGENTA + '> '+ s.RESET_ALL)
+        cat = input(f.MAGENTA + '> ' + s.RESET_ALL)
 
         if (cat.lower() == "1"):
             clear()
@@ -248,7 +234,7 @@ def download(yt):
 
         else:
             clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
+            print("download error")
 
 
 def itag(test, yt):
@@ -264,170 +250,91 @@ def itag(test, yt):
             if yt.streams.get_by_itag(int(itag)):
                 if int(test) == 5:
                     itaginfo = line[line.find('-')+3:]
-                    print(f.BLUE + '[', f.BLUE +  str(i), f.BLUE + '] ', f.GREEN + itaginfo, end='', sep='')
+                    print(f.BLUE + '[', f.BLUE + str(i), f.BLUE +
+                          '] ', f.GREEN + itaginfo, end='', sep='')
                     itagdown.append(itag)
                     i = i + 1
                 elif int(test) == int(line[line.index('-') + 1: line.index('-') + 2]):
                     itaginfo = line[line.find('-')+3:]
-                    print(f.BLUE + '[', f.BLUE +  str(i), f.BLUE + '] ', f.GREEN + itaginfo, end='', sep='')
+                    print(f.BLUE + '[', f.BLUE + str(i), f.BLUE +
+                          '] ', f.GREEN + itaginfo, end='', sep='')
                     itagdown.append(itag)
                     i = i + 1
             line = fp.readline()
             cnt += 1
 
     print(f.RED + "\n ~ enter for back ~ ")
-    cat = input(f.MAGENTA + '> '+ s.RESET_ALL)
+    cat = input(f.MAGENTA + '> ' + s.RESET_ALL)
     if cat == "":
         clear()
         download(yt)
     downloadmenu(yt.streams.get_by_itag(itagdown[int(cat)]))
 
 
-        
-
-
 def downloadmenu(down):
     clear()
     while True:
-        print('  ~ Location ~ ')
+        print(f.RED + '  ~ Location ~ ')
         print(f.MAGENTA + '1 ~ Desktop')
         print(f.GREEN + '2 ~ Downloads')
         print(f.CYAN + '3 ~ Set location')
-        print(f.RED + '0 ~ exit')
+        print(f.RED + '0 ~ Exit')
 
-        loc = input(f.MAGENTA + '> '+ s.RESET_ALL)
+        loc = input(f.MAGENTA + '> ' + s.RESET_ALL)
 
         if (loc.lower() == "1"):
             clear()
-            print("  ~ downloading ~  ")
+            print(f.GREEN + "  ~ downloading ~  ")
             down.download(desktop)
             clear()
-            print("   ~ finished ~  ")
-            #final()
+            print(f.GREEN + "   ~ finished ~  ")
+            sleep(2)
+            running()
 
         elif (loc.lower() == "2"):
             clear()
-            print("  ~ downloading ~  ")
+            print(f.GREEN + "  ~ downloading ~  ")
             down.download(downloads)
             clear()
-            print("   ~ finished ~  ")
-            #final()
+            print(f.GREEN + "   ~ finished ~  ")
+            sleep(2)
+            running()
 
         elif (loc.lower() == "3"):
             clear()
-            dest = input("Enter a destination\n> ")
-            print("  ~ downloading ~  ")
+            dest = input(f.RED + "Enter a destination\n> ")
+            print(f.GREEN + "  ~ downloading ~  ")
             down.download(str(dest))
             clear()
-            print("   ~ finished ~  ")
-            #final()
+            print(f.GREEN + "   ~ finished ~  ")
+            sleep(2)
+            running()
 
         elif (loc.lower() == "0"):
             clear()
             bye()
         else:
             clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
+            print("downloadmenu error")
 
 
-def running():
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
 
+
+def bye():
     clear()
-    banner()
-    while True:
-
-        print(f.MAGENTA + '1 ~ Search')
-        print(f.GREEN + '2 ~ Link')
-        print(f.CYAN + '3 ~ Color test')
-        print(f.RED + '0 ~ exit')
-
-        ready = input(f.MAGENTA + '> '+ s.RESET_ALL)
-
-        if (ready.lower() == "1"):
-            clear()
-            search()
-        elif (ready.lower() == "2"):
-            clear()
-            urlgo = input("url > ")
-            clear()
-            description(urlgo)
-        elif (ready.lower() == "3"):
-            clear()
-            print(f.BLACK + "BLACK")
-            print(f.RED + "RED")
-            print(f.GREEN + "GREEN")
-            print(f.YELLOW + "YELLOW")
-            print(f.BLUE + "BLUE")
-            print(f.MAGENTA + "MAGENTA")
-            print(f.CYAN + "CYAN")
-            print(f.WHITE + "WHITE")
-            print(f.RESET + "RESET\n")
-        elif(ready.lower() == "gitgud"):
-            gitgud()
-        elif (ready.lower() == "0"):
-            clear()
-            bye()
-        else:
-            clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
+    print("I don't like goodbyes if you're leaving then get the fuck.")
+    exit()
 
 
-"""
-def final():
-    
-    while True:
-        print('1 ~ Search another')
-        print('2 ~ Link another')
-        print('3 ~ Go to main page')
-        print('0 ~ exit')
-
-        cat = input("> ")
-
-        if (cat.lower() == "1"):
-            clear()
-            search()
-        elif (cat.lower() == "2"):
-            clear()
-            urlgo = input("url > ")
-            clear()
-            description(urlgo)
-        elif (cat.lower() == "3"):
-            running()
-        elif (cat.lower() == "0"):
-            clear()
-            bye()
-        else:
-            clear()
-            print("Bir daha dene! Seni şanslı araba! Fırlat!")
-"""
-
-
-
-
-itagdown = list()
-
-if platform == "linux" or platform == "linux2":
-    desktop = linuxdesktop
-    documents = linuxdocuments
-    downloads = linuxdownloads
-if platform == "win32":
-    desktop = windowsdesktop
-    documents = windowsdocuments
-    downloads = windowsdownloads
-
-
-
-
-
-parser = argparse.ArgumentParser(description = des)
-parser.add_argument('-r', '--run', action='store_true', help="BURN BABY BURN!")
+parser = argparse.ArgumentParser(description=des)
+parser.add_argument('-r', '--run', action='store_true', help="run the program")
 parser.add_argument('-d', '--download', help="Download the video")
-#parser.add_argument('-s', '--search', help="Search for video")
-
-
 args = parser.parse_args()
-
-
 
 try:
     if args.run:
@@ -435,9 +342,9 @@ try:
     if args.download:
         yt_obj = YouTube(str(args.download))
         yt_obj.streams.get_highest_resolution().download(desktop)
+        clear()
+        print(f.GREEN + "   ~ finished ~  ")
+
 except:
     print('Task failed succesfuly.')
     pass
-
-
-
